@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "latest",
+  "version": "0.0.0",
+  "description": "dtinth’s new tab page",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'; connect-src 'self' wss://*.firebaseio.com https://*.googleapis.com;",
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "background": {
+    "scripts": [
+      "vendor/firebasejs/7.6.1/firebase-app.js",
+      "vendor/firebasejs/7.6.1/firebase-auth.js",
+      "vendor/firebasejs/7.6.1/firebase-firestore.js",
+      "background.js"
+    ],
+    "persistent": false
+  }
+}

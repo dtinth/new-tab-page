@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>New Tab</title>
+    <style>
+      body {
+        background: #353433;
+        color: #e9e8e7;
+        font: 16px Arimo, sans-serif;
+        margin: 0;
+        padding: 0;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .current-time {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font: bold 37.5vw Arimo;
+        color: transparent;
+        -webkit-text-stroke: 0.5px #d7fc70;
+        animation: 0.25s fade-in;
+      }
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .cards {
+        height: 100vh;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        align-content: flex-start;
+        flex-wrap: wrap;
+        overflow: auto;
+      }
+      .card {
+        display: block;
+        margin: 8px;
+        border: 2px solid var(--border-color);
+        width: 320px;
+        flex: none;
+        padding: 8px 8px 6px;
+        border-radius: 8px;
+        line-height: 22px;
+        color: inherit;
+        text-decoration: none;
+      }
+      .card > strong {
+        color: #bef;
+      }
+      .card > .time {
+        color: #8b8685;
+        font-size: 0.85em;
+      }
+      .card:hover {
+        border-color: #ffc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="vendor/vue/2.6.11/vue.js"></script>
+    <script src="vendor/lodash/4.17.15/lodash.js"></script>
+    <script src="vendor/chroma-js/2.1.0/chroma.js"></script>
+    <script src="newtab.js"></script>
+  </body>
+</html>
