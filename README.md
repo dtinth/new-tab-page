@@ -13,7 +13,7 @@ Since some friends tweet a lot while others occasionally, I made it so that it d
 
 ## Setting up
 
-**Note:** Since I made this for my own use, I use multiple 3rd party services (some of which no longer allows new sign ups) to help me build this quickly with the least amount of custom code or maintenance required. It assumes you know how to use Firebase and webtask (no longer accepting sign-ups).
+> **Note:** The set up you see here is very convoluted and user-unfriendly. Since I made this for my own use, I use multiple 3rd party services (some of which no longer allows new sign ups) to help me build this quickly with the least amount of custom code or maintenance required. It assumes you know how to use Firebase and webtask (no longer accepting sign-ups).
 
 The constraints are:
 
