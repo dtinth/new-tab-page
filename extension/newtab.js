@@ -26,14 +26,21 @@ Vue.component('current-time', {
   },
 })
 
-Vue.component('tweet-board', {
-  template: `<div class="tweet-board">
+Vue.component('card-board', {
+  template: `<div class="card-board">
     <div class="cards">
-      <a :href="card.data.url" :data-tweet="card.data.tweet" class="card" v-for="card of cards" :key="card.id" :style="style(card)">
-        <strong>{{card.data.title}}</strong>
-        {{card.data.description}}
-        <span class="time">{{formatTime(card.data.time)}}</span>
-      </a>
+      <template v-for="card of cards">
+        <tweet-card :url="card.data.url" :tweet-json="card.data.tweet" v-if="card.data.tweet" :key="card.id" :card-style="style(card)">
+          <template v-slot:time>
+            <span class="time">{{formatTime(card.data.time)}}</span>
+          </template>
+        </tweet-card>
+        <a v-else :href="card.data.url" class="card" :key="card.id" :style="style(card)">
+          <strong>{{card.data.title}}</strong>
+          {{card.data.description}}
+          <span class="time">{{formatTime(card.data.time)}}</span>
+        </a>
+      </template>
     </div>
   </div>`,
   data() {
@@ -83,10 +90,48 @@ Vue.component('tweet-board', {
   },
 })
 
+Vue.component('tweet-card', {
+  props: ['url', 'tweetJson', 'cardStyle'],
+  template: `<a :href="url" class="card" :style="cardStyle" :data-tweet="tweetJson">
+    <img class="tweet-thumb" :src="image" v-if="image && !imageLoadFailed" @error="imageLoadFailed=true" />
+    <strong>{{tweet.user.screen_name}}</strong>
+    <span style="white-space: pre-line">{{text}}</span>
+    <slot name="time"></slot>
+    <div class="tweet-subtweet">
+      <tweet-card :tweet-json="quotedJson" v-if="tweet.quoted_status" />
+    </div>
+  </a>`,
+  data() {
+    return { imageLoadFailed: false }
+  },
+  computed: {
+    tweet() {
+      return JSON.parse(this.tweetJson)
+    },
+    text() {
+      return Array.from(this.tweet.full_text)
+        .slice(...this.tweet.display_text_range)
+        .join('')
+    },
+    quotedJson() {
+      return JSON.stringify(this.tweet.quoted_status)
+    },
+    image() {
+      const item =
+        this.tweet.entities &&
+        this.tweet.entities.media &&
+        this.tweet.entities.media[0]
+      if (item && item.sizes.thumb) {
+        return item.media_url.replace(/\.\w+$/, '?format=jpg&name=thumb')
+      }
+    },
+  },
+})
+
 App.instance = new Vue({
   el: '#app',
   template: `<div>
     <current-time />
-    <tweet-board/>
+    <card-board/>
   </div>`,
 })

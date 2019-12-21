@@ -23,13 +23,15 @@
         font: bold 37.5vw Arimo;
         color: transparent;
         -webkit-text-stroke: 0.5px #d7fc70;
-        animation: 0.25s fade-in;
+        animation: 0.25s come-up;
       }
-      @keyframes fade-in {
+      @keyframes come-up {
         from {
+          transform: scale(0.99);
           opacity: 0;
         }
         to {
+          transform: scale(1);
           opacity: 1;
         }
       }
@@ -45,17 +47,20 @@
         flex-wrap: wrap;
         overflow: auto;
       }
-      .card {
-        display: block;
+      .cards > * {
         margin: 8px;
-        border: 2px solid var(--border-color);
         width: 320px;
         flex: none;
-        padding: 8px 8px 6px;
+      }
+      .card {
+        display: block;
+        border: 2px solid var(--border-color);
+        padding: 8px;
         border-radius: 8px;
         line-height: 22px;
         color: inherit;
         text-decoration: none;
+        overflow: hidden;
       }
       .card > strong {
         color: #bef;
@@ -66,6 +71,18 @@
       }
       .card:hover {
         border-color: #ffc;
+      }
+      .tweet-thumb {
+        float: right;
+        width: 64px;
+        height: 64px;
+        margin: -4px;
+        margin-left: 6px;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      .tweet-subtweet {
+        margin-top: 4px;
       }
     </style>
   </head>
